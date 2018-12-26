@@ -29,8 +29,8 @@ void outputMatrix(int n, int m, int** a) {
 void createMassive(int n, int m, int **a, int *b, bool* resheto) {
 	int max_;
 	for (int i = 0; i < n; i++) {
-		max_ = a[i][0];
-		for (int j = 1; j < m; j++) {
+		max_ = a[i][2];
+		for (int j = 3; j < m; j++) {
 			if (max_ < a[i][j] && &resheto[j]) max_ = a[i][j];
 		}
 		b[i] = max_;

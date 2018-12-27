@@ -1,3 +1,4 @@
+#include "stdafx.h"
 #include <string>
 #include <fstream>
 #include <iostream>
@@ -6,10 +7,20 @@ using namespace std;
 
 int main() {
 	int count = 0;
+	int n;
 	fstream F, G;
+	string s;
+	F.open("F.txt", ios::out);
+	cin >> n;
+	for (int i = 0; i < n; i++) {
+		cin >> s;
+		F << s;
+	}
+	F.close();
+
 	F.open("F.txt", ios::in);
 	G.open("G.txt", ios::out); //Привязываем и открываем файлы
-	string s;
+	
 	string SG = { " " };
 	int Col = 1;
 	char NumberChar;
@@ -52,6 +63,12 @@ int main() {
 	}
 	F.close();
 	G.close();
+
+	G.open("G.txt", ios::in);
+	for (int i = 0; i < n; i++) {
+		getline(G, s);
+		cout << s;
+	}
 	system("pause");
 	return 0;
 }

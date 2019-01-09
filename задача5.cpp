@@ -32,9 +32,9 @@ int main() {
 			if (minM > abs(M - a[i][j])) minM = abs(M - a[i][j]);
 		}
 
-	for(int i = 0; i < n; i++)
-		for (int j = 0; j < n; j++) {
-			if (i<j && i>n - 1 - j && abs(M - a[i][j]) < minM) count++;
+	for(int i = 1; i < n - 1; i++)
+		for (int j = 0; j < n - i - 1 && j < i - 1; j++) {
+			if (abs(M - a[i][j]) < minM) count++;
 		}
 
 	cout << minM;

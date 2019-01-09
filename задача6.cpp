@@ -6,17 +6,15 @@ using namespace std;
 1.Прибавь 1,
 2.Увеличь число десятков на 1.
 Сколько есть программ, которые натуральное число А преобразуют в число В?*/
-
-int Calculator(int A, int B) {
-	int result = 0;
-	if (B - 10 < A) {
-		result = 1;
+int F(int x, int y){
+	if (x == y) return 1;
+	if (x < y) {
+		if(((x/10)%10) != 9)
+			return F(x+10, y) + F(x+1, y);
+		else return F(x +1, y);
 	}
-	else
-	{
-		result = Calculator(A, B - 1) + Calculator(A, B - 10);
-	}
-	return result;
+		else
+			return 0;
 }
 
 int main() {

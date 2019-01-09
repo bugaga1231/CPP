@@ -1,83 +1,54 @@
-#include "pch.h"
+// ConsoleApplication2.cpp : Defines the entry point for the console application.
+
+#include "stdafx.h"
 #include <iostream>
 #include <fstream>
-#include <string>
 using namespace std;
 struct student
 {
-	string second_name;
-	string name;
-	string mark;
-};
-
-struct student_ {
-	string second_name;
-	string name;
-	int mark1 = 0;
-	int mark2 = 0;
-	int mark3 = 0;
-	int mark4 = 0;
+	char second_name[21];
+	char name[16];
+	int mark1;
+	int mark2;
+	int mark3;
+	int mark4;
 	int mark = 0;
 };
+
 int main()
 {
 	int n; cin >> n;
 	student b;
 	ofstream f;
-	f.open("F.txt");
+	f.open("F.bin", ios::binary);
 	for (int i = 0; i < n; ++i)
 	{
 		cout << "Enter second name :" << endl;
 		cin >> b.second_name;
 		cout << "Enter name :" << endl;
 		cin >> b.name;
-		cout << "Enter mark :" << endl;
-		cin.ignore(32767, '\n');
-		getline(cin, b.mark);
-		f << b.second_name << " " << b.name << " " << b.mark << endl;
+		cout << "Enter marks :" << endl;
+		cin >> b.mark1;
+		cin >> b.mark2;
+		cin >> b.mark3;
+		cin >> b.mark4;
+		f.write((char*)&b, sizeof(student));
 	}
 	f.close();
+	f.flush();
 
 	string s;
-	ifstream F;
-	student_ *a = new student_[n];
-	F.open("F.txt");
-	for(int i = 0; i < n; i++) {
-		getline(F, s);
-		int j, k, z1, z2, z3, z4;
-		for (j = 0; s[j] != ' '; j++)
-			a[i].second_name += s[j];
-		for (k = j + 1; s[k] != ' '; k++)
-			a[i].name += s[k];
-		for (z1 = k + 1; s[z1] != ' '; z1++){
-			a[i].mark1 += (s[z1] & 0x0F);
-			a[i].mark1 *= 10;
-		}
-		a[i].mark1 /= 10;
-		for (z2 = z1 + 1; s[z2] != ' '; z2++) {
-			a[i].mark2 += (s[z2] & 0x0F);
-			a[i].mark2 *= 10;
-		}
-		a[i].mark2 /= 10;
-		for (z3 = z2 + 1; s[z3] != ' '; z3++) {
-			a[i].mark3 += (s[z3] & 0x0F);
-			a[i].mark3 *= 10;
-		}
-		a[i].mark3 /= 10;
-		for (z4 = z3 + 1; z4 < s.length(); z4++) {
-			a[i].mark4 += (s[z4] & 0x0F);
-			a[i].mark4 *= 10;
-		}
-		a[i].mark4 /= 10;
-
-		a[i].mark = a[i].mark1 + a[i].mark2 + a[i].mark3 + a[i].mark4;
-
+	student *a = new student[n];
+	ifstream F("F.bin", ios::binary || ios::in);
+	for (int i = 0; i < n; i++) {
+		F.read((char*)&a[i], sizeof(student));
+		(int)a[i].mark = (int)a[i].mark1 + (int)a[i].mark2 + (int)a[i].mark3 + (int)a[i].mark4;
 	}
 	F.close();
 
-	student_ temp;
-	for(int i = 0; i < n - 1; i++)
-		for (int j =  i + 1; j < n; j++)
+	student temp;
+	for (int i = 0; i < n - 1; i++)
+		for (int j = i + 1; j < n; j++)
 			if (a[i].mark < a[j].mark) {
 				temp = a[i];
 				a[i] = a[j];

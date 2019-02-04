@@ -1,5 +1,3 @@
-
-#include "pch.h"
 #include <iostream>
 #include "stdlib.h"
 #include <time.h>
@@ -32,13 +30,14 @@ int main() {
 			if (minM > abs(M - a[i][j])) minM = abs(M - a[i][j]);
 		}
 
-	for(int i = 1; i < n - 1; i++)
-		for (int j = 0; j < n - i - 1 && j < i - 1; j++) {
+	for (int i = 1; i < n / 2; i++)
+	for (int j = 0; j < i; j++) {
 			if (abs(M - a[i][j]) < minM) count++;
+			if (abs(M - a[n - i - 1][j]) < minM) count++;
 		}
 
 	cout << minM;
-	if (count) cout << count;
+	if (count > 0) cout << count;
 	else cout << "ERROR";
 	return 0;
 }

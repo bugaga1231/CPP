@@ -1,20 +1,19 @@
-#include "pch.h"
 #include <iostream>
+
 using namespace std;
 
-/*У исполнителя Калькулятор две команды, которым присвоены номера:
-1.Прибавь 1,
-2.Увеличь число десятков на 1.
-Сколько есть программ, которые натуральное число А преобразуют в число В?*/
-int F(int x, int y){
-	if (x == y) return 1;
-	if (x < y) {
-		if(((x/10)%10) != 9)
-			return F(x+10, y) + F(x+1, y);
-		else return F(x +1, y);
+
+int Calculator(int A,int B){
+	int result = 0;
+	if (A == B) {
+		result = 1;
 	}
-		else
-			return 0;
+	else
+	{
+		if (A + 10 < B) result = Calculator(A + 1, B) + Calculator(A + 10 ,B);
+		else result = Calculator(A + 1, B);
+	}
+	return result;
 }
 
 int main() {
@@ -22,5 +21,5 @@ int main() {
 	cout << "Enter A,B " << endl;
 	cin >> A >> B;
 	cout << "Number of programs : " << Calculator(A, B) << endl;
-	system("pause");
+	return 0;
 }

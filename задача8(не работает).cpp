@@ -61,17 +61,21 @@ string buildNumber(string s) {
 }
  
 int main() {
-	string in, out;
-	cout << "Enter input file path:" << endl;
-	getline(cin, in);
-	cout << "Enter output file path:" << endl;
-	getline(cin, out);
+	string s;
  
-	ifstream f(in);
-	ofstream g(out);
+	ofstream f1("f.txt");
+	int n;
+	cin >> n;
+	for (int i = 0; i < n; i++){
+		cin >> s;
+		f1 << s << '\t';
+	};
+	f1.close();
+	ifstream f("f.txt");
+	ofstream g("g.txt");
  
 	if (!f || !g) {
-		cout << "Error, blyat";
+		cout << "Error";
 		return -1;
 	}
  

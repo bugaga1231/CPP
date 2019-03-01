@@ -10,7 +10,7 @@ int Calculator(int A,int B){
 	}
 	else
 	{
-		if (A + 10 < B) result = Calculator(A + 1, B) + Calculator(A + 10 ,B);
+		if (A + 10 <= B) result = Calculator(A + 1, B) + Calculator(A + 10 ,B);
 		else result = Calculator(A + 1, B);
 	}
 	return result;

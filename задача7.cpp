@@ -29,6 +29,7 @@ int main() {
 	}
 
 	cout << res << endl;
-
+	cin.get();
+	cin.get();
 	return 0;
 }
